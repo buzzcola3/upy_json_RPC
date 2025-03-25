@@ -1,11 +1,9 @@
 """ Utility functions for package."""
-import datetime
-import inspect
 import json
 import sys
 
-from . import six
-
+from . import datetime
+from . import inspect
 
 class JSONSerializable(object):
 

@@ -3,12 +3,23 @@
 For usage examples see :meth:`Dispatcher.add_method`
 
 """
-import functools
 try:
     from collections.abc import MutableMapping
 except ImportError:
-    from collections.collections import MutableMapping
+    try:
+        from collections.collections import MutableMapping
+    except ImportError:
+        class MutableMapping:
+            pass
 
+
+def partial(func, *args, **kwargs):
+    def _partial(*more_args, **more_kwargs):
+        kw = kwargs.copy()
+        kw.update(more_kwargs)
+        return func(*(args + more_args), **kw)
+
+    return _partial
 
 class Dispatcher(MutableMapping):
 
@@ -117,7 +128,7 @@ class Dispatcher(MutableMapping):
 
         """
         if (name or context_arg) and not f:
-            return functools.partial(self.add_method, name=name,
+            return partial(self.add_method, name=name,
                                      context_arg=context_arg)
 
         name = name or f.__name__
