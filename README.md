@@ -12,35 +12,8 @@ This is a modified version of [pavlov99/json-rpc](https://github.com/pavlov99/js
 
 ## Usage
 
-### Example WebServer using await Methods and Microdot on ESP32 (MicroPython Example)
-```python
-import asyncio
-from jsonrpc import JSONRPCResponseManager, dispatcher
-from microdot import Microdot, send_file
-from microdot.websocket import with_websocket
-
-app = Microdot()
-
-@app.route('/')
-async def run(request):
-    return send_file("webserver/index.html")
-
-@app.route('webserver/<path:path>')
-async def static(request, path):
-    if '..' in path:
-        return 'Not found', 404
-    return send_file('webserver/' + path)
-
-@app.route('/ws')
-@with_websocket
-async def rpc_handler(request, ws):
-    while True:
-        message = await ws.receive()
-        response = await JSONRPCResponseManager.handle(message, dispatcher)
-        await ws.send(response.json)
-
-app.run(debug=True, port=80)
-```
+### Example:
+see examples at pavlov99/json-rpc
 
 ## License
 This project follows the original license from `pavlov99/json-rpc`.
