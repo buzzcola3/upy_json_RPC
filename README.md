@@ -10,18 +10,6 @@ This is a modified version of [pavlov99/json-rpc](https://github.com/pavlov99/js
 - Works with **Cython** and **MicroPython**.
 - Supports asynchronous (`await`) RPC methods.
 
-## Installation
-
-For Cython:
-```sh
-pip install cython json-rpc
-```
-
-For MicroPython, copy the modified `jsonrpc` module to your device:
-```sh
-mpremote cp jsonrpc.py :/jsonrpc.py
-```
-
 ## Usage
 
 ### Example WebServer using await Methods and Microdot on ESP32 (MicroPython Example)
